@@ -1,5 +1,5 @@
 export interface IThreadInfo {
-    username: string;
+    email: string;
     skill: string;
     threadId: string;
     assistantId: string;
