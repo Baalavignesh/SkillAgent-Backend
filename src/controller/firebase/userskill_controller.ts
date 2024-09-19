@@ -13,10 +13,12 @@ let addNewSkill = async (req: Request, res: Response) => {
 }
 
 let fetchUserSkills = async (req: Request, res: Response) => {
+  console.log(req.query.email);
+  const email = req.query.email as string;
   try {
     const q = query(
       collection(db, "userskills"),
-      where("username", "==", req.body.username)
+      where("email", "==", email)
     )
 
     const querySnapshot = await getDocs(q)
@@ -36,13 +38,12 @@ let fetchUserSkills = async (req: Request, res: Response) => {
 
 let fetchSkillInfo = async (req: Request, res: Response) => {
   try {
-    const username = req.query.username as string
+    const email = req.query.email as string
     const skill = req.query.skill as string
 
-    console.log(username, skill)
     const q = query(
       collection(db, "userskills"),
-      where("username", "==", username),
+      where("email", "==", email),
       where("title", "==", skill)
     )
 

@@ -1,5 +1,4 @@
-import { setDoc, doc, getDoc, getFirestore } from "firebase/firestore"
-import OpenAI from "openai"
+import { setDoc, doc, getDoc } from "firebase/firestore"
 import { IThreadInfo } from "../../models/threadInfo.js"
 import db from "../../config/firebase.js"
 import { Request, Response } from "express"
@@ -27,7 +26,7 @@ let fetchThreadId = async (req: Request, res: Response) => {
   const skill = req.query.skill as string
 
   let documentId = email + skill
-  console.log(documentId)
+  console.log(documentId);
   try {
     const docRef = doc(db, "skillthread", documentId)
     const docSnap = await getDoc(docRef)
@@ -37,12 +36,14 @@ let fetchThreadId = async (req: Request, res: Response) => {
       return res.status(200).json(skillData)
     } else {
       console.log("No such document!")
-      return res.status(200).json({ message: "no data available" })
+      return res.status(200).json({message: "no document"})
     }
   } catch (error) {
     console.error("Error fetching skillthread ID", error)
     return res.status(500).json({ error: "Error fetching skillthread ID" })
   }
 }
+
+
 
 export { AddThread, fetchThreadId }
