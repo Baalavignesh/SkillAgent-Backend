@@ -15,4 +15,3 @@ router.post("/", authenticate, addNewSkill)
 router.get("/skillinfo", authenticate, fetchSkillInfo)
 
 export default router
-

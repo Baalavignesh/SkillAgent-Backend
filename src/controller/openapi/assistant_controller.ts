@@ -6,6 +6,7 @@ let CreateAssistant = async (req: Request, res: Response) => {
     const assistant = await openaiInstance.beta.assistants.create({
       name: `Personal ${req.body.name}`,
       instructions: req.body.instruction,
+      tools: [{ type: "code_interpreter" }],
       model: "gpt-4o",
     })
 

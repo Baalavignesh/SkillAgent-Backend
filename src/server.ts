@@ -5,6 +5,8 @@ import "dotenv/config"
 import userskill_routes from "./routes/firebase/userskills.js"
 import userauth_routes from "./routes/firebase/auth.ts"
 import skillthread_routes from "./routes/firebase/skillthread.ts"
+import studyplan_routes from "./routes/firebase/studyplan.ts"
+
 
 //OpenAI
 import openai_threads_routes from "./routes/openai/threads.ts"
@@ -27,10 +29,14 @@ app.use(express.json())
 app.use("/api/auth", userauth_routes)
 app.use("/api/userskill", userskill_routes)
 app.use("/api/skillthread", skillthread_routes)
+app.use("/api/studyplan", studyplan_routes)
+
 
 //OPEN AI ENDPOINTS
 app.use("/api/openai/thread", openai_threads_routes)
 app.use("/api/openai/assistant", openai_assistant_routes)
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
