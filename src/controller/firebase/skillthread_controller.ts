@@ -9,6 +9,7 @@ let AddThread = async (req: Request, res: Response) => {
     threadId: req.body.threadId,
     assistantId: req.body.assistantId,
     skill: req.body.skill,
+    studyPlanId: req.body.studyPlanId
   }
   let documentId = req.body.email + req.body.skill
 
