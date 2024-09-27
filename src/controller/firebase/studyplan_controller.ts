@@ -58,30 +58,72 @@ let updateStudyPlanThreadId = async (req: Request, res: Response) => {
 
     if (userDoc.exists()) {
       const userData = userDoc.data()
-      console.log(userData);
-      const updatedPlans = userData.plan.map((planItem:any, index:number) => {
-        // Update the threadId for the specified dayNumber
-        if (index+1 === dayNumber) {
+      const updatedPlans = userData.plan.map((planItem: any, index: number) => {
+        if (index + 1 === dayNumber) {
           return {
             ...planItem,
             threadId: newThreadId,
-          };
+          }
         }
-        return planItem;
-      });
+        return planItem
+      })
 
-      // Update the document with the modified `plan` array
       await updateDoc(studyPlanRef, {
         plan: updatedPlans,
       })
-      return res.status(200).json({ message: "Data added successfully" })
-    }
-    else {
-      console.log("burh")
+      return res.status(200).json({ message: "Data updated successfully" })
     }
   } catch (error) {
-    console.error("Error adding study plan:", error)
-    return res.status(500).json({ error: "Error adding study plan" })
+    console.error("Error updating study plan:", error)
+    return res.status(500).json({ error: "Error updating study plan" })
   }
 }
-export { addStudyPlan, fetchStudyPlan, updateStudyPlanThreadId }
+
+let updateTaskStatus = async (req: Request, res: Response) => {
+  try {
+    const docId = req.body.docId as string
+    const taskNumber = req.body.taskNumber as number
+    const dayNumber = req.body.dayNumber as number
+
+    console.log(docId, taskNumber, dayNumber)
+    const studyPlanRef = doc(db, "studyplan", docId)
+
+    const userDoc = await getDoc(studyPlanRef)
+
+    if (userDoc.exists()) {
+      const userData = userDoc.data()
+      console.log(userData)
+      const updatedTasks = userData.plan.map((planItem: any, index: number) => {
+        if (index + 1 === dayNumber) {
+          return {
+            ...planItem,
+            tasks: planItem.tasks.map((task: any, taskIndex: number) => {
+              if (taskIndex === taskNumber) {
+                return {
+                  ...task,
+                  isDone: true, 
+                }
+              }
+              return task 
+            }),
+          }
+        }
+        return planItem
+      })
+
+      await updateDoc(studyPlanRef, {
+        plan: updatedTasks,
+      })
+      return res.status(200).json({ message: "Data updated successfully" })
+    }
+  } catch (error) {
+    console.error("Error updating study plan:", error)
+    return res.status(500).json({ error: "Error updating study plan" })
+  }
+}
+export {
+  addStudyPlan,
+  fetchStudyPlan,
+  updateStudyPlanThreadId,
+  updateTaskStatus,
+}
