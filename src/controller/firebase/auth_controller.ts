@@ -16,11 +16,10 @@ let RegisterUser = (req: Request, res: Response) => {
       return res.status(200).json(user)
     })
     .catch((error) => {
-      const errorCode = error.code
       const errorMessage = error.message
       console.error("Error creating a new user :", error)
       return res
-        .status(errorCode)
+        .status(500)
         .json({ error: `Error creating a new user : ${errorMessage}` })
     })
 }
@@ -33,10 +32,9 @@ let SignInUser = (req: Request, res: Response) => {
       return res.status(200).json(user)
     })
     .catch((error) => {
-      const errorCode = error.code
       const errorMessage = error.message
       return res
-        .status(errorCode)
+        .status(500)
         .json({ error: `Error signing-in user : ${errorMessage}` })
     })
 }
