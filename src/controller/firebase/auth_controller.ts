@@ -17,10 +17,9 @@ let RegisterUser = (req: Request, res: Response) => {
     })
     .catch((error) => {
       const errorMessage = error.message
-      console.error("Error creating a new user :", error)
       return res
         .status(500)
-        .json({ error: `Error creating a new user : ${errorMessage}` })
+        .json({ error: `${errorMessage}` })
     })
 }
 
@@ -35,7 +34,7 @@ let SignInUser = (req: Request, res: Response) => {
       const errorMessage = error.message
       return res
         .status(500)
-        .json({ error: `Error signing-in user : ${errorMessage}` })
+        .json({ error: `${errorMessage}` })
     })
 }
 
