@@ -1,6 +1,6 @@
 # SkillAgent Backend - Node.js Application
 
-![main logo](https://github.com/Baalavignesh/EzLearn-Hackvortex/blob/main/src/assets/github_img/img0.png?raw=true)
+![main logo](https://github.com/Baalavignesh/SkillAgent-React/blob/main/src/assets/readmelogo.png?raw=true)
 
 # Project Overview: Skills-Based Workforce Development Application
 
