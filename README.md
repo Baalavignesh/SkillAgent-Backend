@@ -21,7 +21,7 @@ The application is designed to help users acquire new skills efficiently using A
    ```
 2. **Navigate to the project directory:**
     ```bash
-    cd skillagent-frontend
+    cd skillagent-backend
     ```
 3. **Install the dependencies:**
     ```bash
